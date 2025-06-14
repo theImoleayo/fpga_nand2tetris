@@ -13,5 +13,11 @@ module Mux16(
 );
 
 	// Put your code here:
+	genvar i;
+	generate
+		for(i = 0; i<16; i = i+1) begin: gen_Mux
+			Mux Mux16_A(a[i], b[i], sel,  out[i]);
+		end
+	endgenerate
 
 endmodule

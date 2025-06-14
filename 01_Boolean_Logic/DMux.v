@@ -13,5 +13,12 @@ module DMux(
 );
 
 	// Put your code here:
+	// a = in & ~sel
+	// b = in & sel
+	wire not_sel;
+
+	Not NOT1(sel, not_sel);
+	And AND1(in, not_sel, a);
+	And AND2(in, sel, b);
 
 endmodule

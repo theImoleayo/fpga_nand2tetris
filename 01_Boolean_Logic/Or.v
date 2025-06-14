@@ -11,6 +11,14 @@ module Or(
 	output out
 );
 
-	// Put your code here:
+//noted that wires have to been declared first, noted!
+	wire not_a;
+	wire not_b;
+	wire and_out;
+
+	Not NOT1(a,not_a);
+	Not NOT2(b,not_b);
+	And AND1(not_a,not_b,and_out);
+	Not NOT3(and_out, out);
 
 endmodule

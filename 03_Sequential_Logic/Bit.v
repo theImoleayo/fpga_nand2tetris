@@ -12,6 +12,19 @@ module Bit(
 	output out
 );
 
-	// Put your code here:
 
+	//..LET THE DRAMA begin
+	// //USING MUX AND DFF
+	// Mux PICK(
+	// 	// in,
+	// );
+
+	reg bit_out;
+	reg	load_out;
+	always @(posedge clk) begin
+		if (load)
+		bit_out <= in;
+	end
+
+	assign out = bit_out;
 endmodule

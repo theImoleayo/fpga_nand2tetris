@@ -9,6 +9,12 @@ module Not16(
 	output [15:0] out
 );
 
-	// Put your code here:
+	genvar i;
+
+	generate
+		for(i=0; i<16; i=i+1) begin: gen_not
+				Not NOT1(in[i], out[i]);
+		end
+	endgenerate
 
 endmodule

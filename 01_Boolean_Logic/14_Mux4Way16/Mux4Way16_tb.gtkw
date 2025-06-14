@@ -1,20 +1,20 @@
 [*]
-[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Thu Dec 22 14:42:01 2022
+[*] GTKWave Analyzer v3.3.121 (w)1999-2024 BSI
+[*] Sat Jun  7 00:57:20 2025
 [*]
-[dumpfile] "/home/micha/gitlab/nand2tetris/01_Boolean_Logic/13_Mux4Way16/Mux4Way16_tb.vcd"
-[dumpfile_mtime] "Thu Dec 22 14:41:40 2022"
-[dumpfile_size] 4764720
-[savefile] "/home/micha/gitlab/nand2tetris/01_Boolean_Logic/13_Mux4Way16/Mux4Way16_tb.gtkw"
-[timestart] 0
-[size] 1000 600
-[pos] -1 -1
-*0.000000 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[dumpfile] "/home/theimoleayo/nand2tetris-fpga/01_Boolean_Logic/14_Mux4Way16/Mux4Way16_tb.vcd"
+[dumpfile_mtime] "Sat Jun  7 00:56:32 2025"
+[dumpfile_size] 4840021
+[savefile] "/home/theimoleayo/nand2tetris-fpga/01_Boolean_Logic/14_Mux4Way16/Mux4Way16_tb.gtkw"
+[timestart] 2242
+[size] 1920 970
+[pos] -27 -24
+*0.892831 2243 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] Mux4Way16_tb.
 [sst_width] 281
 [signals_width] 160
 [sst_expanded] 1
-[sst_vpaned_height] 132
+[sst_vpaned_height] 241
 @200
 -IN
 @22
@@ -32,7 +32,7 @@ Mux4Way16_tb.out[15:0]
 -CMP
 @22
 Mux4Way16_tb.out_cmp[15:0]
-@201
+@200
 -Test
 @28
 Mux4Way16_tb.fail

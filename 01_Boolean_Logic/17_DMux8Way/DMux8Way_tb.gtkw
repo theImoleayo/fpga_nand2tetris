@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Thu Dec 22 14:39:25 2022
+[*] GTKWave Analyzer v3.3.121 (w)1999-2024 BSI
+[*] Sat Jun  7 02:15:04 2025
 [*]
-[dumpfile] "/home/micha/gitlab/nand2tetris/01_Boolean_Logic/16_DMux8Way/DMux8Way_tb.vcd"
-[dumpfile_mtime] "Thu Dec 22 14:38:18 2022"
-[dumpfile_size] 10742
-[savefile] "/home/micha/gitlab/nand2tetris/01_Boolean_Logic/16_DMux8Way/DMux8Way_tb.gtkw"
+[dumpfile] "/home/theimoleayo/nand2tetris-fpga/01_Boolean_Logic/17_DMux8Way/DMux8Way_tb.vcd"
+[dumpfile_mtime] "Sat Jun  7 02:13:03 2025"
+[dumpfile_size] 11966
+[savefile] "/home/theimoleayo/nand2tetris-fpga/01_Boolean_Logic/17_DMux8Way/DMux8Way_tb.gtkw"
 [timestart] 0
 [size] 1669 793
 [pos] -1 -1
-*-1.619024 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-1.443607 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 281
 [signals_width] 110
 [sst_expanded] 1
@@ -41,7 +41,7 @@ DMux8Way_tb.e_cmp
 DMux8Way_tb.f_cmp
 DMux8Way_tb.g_cmp
 DMux8Way_tb.h_cmp
-@201
+@200
 -Test
 @28
 DMux8Way_tb.fail

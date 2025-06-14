@@ -14,5 +14,12 @@ module Register(
 );
 
 	// Put your code here:
+	reg [15:0] out_val;
+	always @(posedge clk) begin
+		if(load) out_val<=in;
+	end
+
+	assign out = out_val;
+
 
 endmodule

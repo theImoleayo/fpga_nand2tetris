@@ -32,10 +32,111 @@ module ALU(
     input f,  				// compute out = x + y (if 1) or x & y (if 0)
     input no, 				// negate the out output?
     output [15:0] out, 			// 16-bit output
-    output zr, 				// 1 if (out == 0), 0 otherwise
+
+   output zr, 				// 1 if (out == 0), 0 otherwise
     output ng 				// 1 if (out < 0),  0 otherwise
 );
+    wire [15:0] not_x;
+    wire [15:0] zero_x;
+    wire [15:0] not_y;
+    wire [15:0] zero_y;
+    wire [15:0] nz_x;
+    wire [15:0] nz_y;
+    wire [15:0] zx_out;
+    wire [15:0] zy_out;
+    wire [15:0] nzx_out;
+    wire [15:0] nzy_out;
 
-	// Put your code here:
+    Not16 NOT_X(
+        x,
+        not_x
+    );
+    Not16 NOT_Y(
+        y,
+        not_y
+    );
+
+    wire [15:0] x_out;
+    wire [15:0] y_out;
+    wire [15:0] inc_x;
+    wire [15:0] inc_y;
+
+    // assign new_z = (nz&1);
+    /*
+     * ------------
+     * ------------
+    */
+
+    Inc16 INCREMENT_X(
+            not_x,
+            inc_x
+    );
+    Add16 ZERO_X(
+        x,
+        inc_x,
+        zero_x
+    );
+    Not16 NegZero_X(
+        zx_out,
+        nz_x
+    );
+
+
+    Inc16 INCREMENT_Y(
+        not_y,
+        inc_y
+    );
+
+    Add16 ZERO_Y(
+        y,
+        inc_y,
+        zero_y
+    );
+    Not16 NegZero_Y(
+        zy_out,
+        nz_y
+    );
+
+    assign zx_out = zx ? zero_x : x;
+
+    assign nzx_out = nx ? nz_x : zx_out;
+
+    assign zy_out = zy ? zero_y : y;
+
+    assign nzy_out = ny ? nz_y : zy_out;
+
+    wire [15:0] f_eq0;
+    wire [15:0] f_eq1;
+
+
+    Add16 ADD_XY(
+        nzx_out,
+        nzy_out,
+        f_eq1
+    );
+
+    And16 AND_XY(
+        nzx_out,
+        nzy_out,
+        f_eq0
+    );
+
+    wire [15:0] f_out;
+
+    assign f_out = f ? f_eq1 : f_eq0;
+
+    wire [15:0] no_eq1;
+
+
+    Not16 NOT_OUT(
+        f_out,
+        no_eq1
+    );
+
+
+    assign out = no ? no_eq1 : f_out;
+
+    assign zr = out == 16'b0 ? 1 : 0;
+    assign ng = out[15] == 1 ? 1 : 0;
 
 endmodule

@@ -1,0 +1,139 @@
+
+	// Put your code here:
+// 	if(zx==1) begin
+//         And16 ZERO_X(
+//             x,
+//             not_x,
+//             zero_x
+//         );
+//         if(nx==1) begin
+//             Not16 NOT_X(
+//                 zero_x,
+//                 nx_x
+//             );
+//             if(zy==1) begin
+//                 And16 ZERO_Y(
+//                     y,
+//                     not_y,
+//                     zero_y
+//                 );
+//                 if(ny==1) begin
+//                     Not16 NOT_Y(
+//                         zero_y,
+//                         nx_y
+//                     );
+//                    if(f==1) begin
+//                         wire f_out_1;
+//                        Add16 ADD1(
+//                             not_x,
+//                             not_y,
+//                             f_out_1
+//                         );
+//                         if(no==1) begin
+//                             Not16 NOT1(f_out_1, out);
+//                         end
+//                         else begin
+//                             assign out = f_out_1;
+//                         end
+//
+//                    end
+//                    else begin
+//                        wire f_out_2;
+//                    And16 AND1(
+//                        not_x,
+//                        not_y,
+//                        f_out_2
+//                    );
+//                    if(no==1) begin
+//                        Not16 NOT1(f_out_2, out);
+//                    end
+//                    else begin
+//                        assign out = f_out_2;
+//                    end
+//
+//                    end
+//                 end
+//                 else begin
+//                     if(f==1) begin
+//                         wire f_out_3;
+//                     Add16 ADD2(
+//                         not_x,
+//                         zero_y,
+//                         f_out_3
+//                     );
+//                 if(no==1) begin
+//                     Not16 NOT2(f_out_1, out);
+//                 end
+//                 else begin
+//                     assign out = f_out_3;
+//                 end
+//
+//                 end
+//                 else begin
+//                     wire f_out_4;
+//                 And16 AND1(
+//                     not_x,
+//                     zero_y,
+//                     f_out_2
+//                 );
+//                 if(no==1) begin
+//                     Not16 NOT1(f_out_2, out);
+//                 end
+//                 else begin
+//                     assign out = f_out_2;
+//                 end
+//
+//                 end
+//                 end
+//                 else begin
+//
+//                 end
+//             end
+//
+//         end
+//     end
+//
+//
+//     else begin
+//
+//     end
+
+
+  function [15:0] out_v;
+        input [15:0] q;
+        input p;
+        input r;
+
+        begin
+        // wire [15:0] zout_q;
+        // wire [15:0] not_q;
+        // wire [15:0] not_zq;
+
+        Not16 Not_q(
+            q,
+            not_q
+        );
+            if(p==1) begin
+                Add16 ZERO_Q(
+                    not_q,
+                    q,
+                    zout_q
+                );
+
+                if(q==1) begin
+                    Not16 Not_q(
+                        zout_q,
+                        not_zq
+                    );
+                    out_v = not_zq;
+                end
+                else begin
+                    out_v = zout_q;
+                end
+            end
+            else begin
+                out_v = q;
+            end
+        end
+
+    endfunction

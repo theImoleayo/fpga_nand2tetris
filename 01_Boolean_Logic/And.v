@@ -12,9 +12,11 @@ module And(
 	input b,
 	output out
 );
-	wire mid;
-	// Put your code here:
-	nand(mid, a, b);
-	not(out,mid);
+	wire out1;
+	//using positional port mapping
+	Nand NAND1(a, b, out1);
+	// Nand NAND2(out1, out1, out);
+	//using NOT GATE
+	Not NOT1(out1, out);
 
 endmodule

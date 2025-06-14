@@ -19,7 +19,34 @@ module DMux8Way(
 	output g,
 	output h
 );
+	wire lo_in;
+	wire hi_in;
+
+	DMux DMUX1(
+	in,
+	sel[2],
+	lo_in,
+	hi_in
+	);
+
+
 
 	// Put your code here:
+	DMux4Way DMUX_4_A(
+	lo_in,
+	sel[1:0],
+	a,
+	b,
+	c,
+	d
+	);
+		DMux4Way DMUX_4_B(
+	hi_in,
+	sel[1:0],
+	e,
+	f,
+	g,
+	h
+	);
 
 endmodule

@@ -11,5 +11,7 @@ module HalfAdder(
 );
 
 	// Put your code here:
+	Xor SUM(a,b,sum);
+	And CARRY_OUT(a, b, carry);
 
 endmodule

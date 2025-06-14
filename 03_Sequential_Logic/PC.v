@@ -15,7 +15,36 @@ module PC(
 	input reset,
 	output [15:0] out
 );	
+	reg [15:0] out_cnt;
+	always @(posedge clk) begin
+		if(reset) out_cnt<=16'b0;
+		else if(load) out_cnt<=in;
+		else if(inc) out_cnt<=out_cnt+1'b1;
+	end
 	
-	// Put your code here:
+	assign out = out_cnt;
+	// wire [15:0] dff_out;
+	// genvar i;
+	// generate
+	// 	for(i=0; i<16; i=i+1)
+	// 		DFF DATA_MEM(
+	// 			clk,
+	// 			in[i],
+	// 			dff_out[i]
+	// 		);
+	// endgenerate
+	// // reg out_priv/;
+ //
+	// reg [15:0] pos_out;
+	// always @(posedge clk) begin
+	// 	// out_priv = pos_out;
+	// 	if (reset) pos_out<=16'b0;
+	// 	else if (load) pos_out<=dff_out;
+	// 	else if (inc) pos_out <=pos_out+1'b1;
+	// end
+	// // Put your code here:
+ //
+	// assign out = pos_out;
+
 
 endmodule
