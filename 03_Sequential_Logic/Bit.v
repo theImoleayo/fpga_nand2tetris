@@ -12,19 +12,20 @@ module Bit(
 	output out
 );
 
+	wire dff_out;
+	wire dff_in;
 
-	//..LET THE DRAMA begin
-	// //USING MUX AND DFF
-	// Mux PICK(
-	// 	// in,
-	// );
+	DFF FLIP_IN(
+		clk,
+		dff_in,
+		out
+	);
 
-	reg bit_out;
-	reg	load_out;
-	always @(posedge clk) begin
-		if (load)
-		bit_out <= in;
-	end
+	Mux MEM_LOAD(
+		out,
+		in,
+		load,
+		dff_in
+	);
 
-	assign out = bit_out;
 endmodule

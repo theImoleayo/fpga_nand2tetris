@@ -97,13 +97,43 @@ module ALU(
         nz_y
     );
 
-    assign zx_out = zx ? zero_x : x;
+    // assign zx_out = zx ? zero_x : x;
+    Mux16 MUX_ZX_OUT(
+        x,
+        zero_x,
+        zx,
+        zx_out
+    );
 
-    assign nzx_out = nx ? nz_x : zx_out;
+    // assign nzx_out = nx ? nz_x : zx_out;
 
-    assign zy_out = zy ? zero_y : y;
+    Mux16 MUX_NZX_OUT(
+        zx_out,
+        nz_x,
+        nx,
+        nzx_out
+    );
 
-    assign nzy_out = ny ? nz_y : zy_out;
+
+
+
+    // assign zy_out = zy ? zero_y : y;
+
+        Mux16 MUX_ZY_OUT(
+        y,
+        zero_y,
+        zy,
+        zy_out
+    );
+
+
+    // assign nzy_out = ny ? nz_y : zy_out;
+    Mux16 MUX_NZY_OUT(
+        zy_out,
+        nz_y,
+        ny,
+        nzy_out
+    );
 
     wire [15:0] f_eq0;
     wire [15:0] f_eq1;
@@ -123,7 +153,13 @@ module ALU(
 
     wire [15:0] f_out;
 
-    assign f_out = f ? f_eq1 : f_eq0;
+    // assign f_out = f ? f_eq1 : f_eq0;
+    Mux16 MUX_FOUT(
+        f_eq0,
+        f_eq1,
+        f,
+        f_out
+    );
 
     wire [15:0] no_eq1;
 
@@ -134,9 +170,26 @@ module ALU(
     );
 
 
-    assign out = no ? no_eq1 : f_out;
+    // assign out = no ? no_eq1 : f_out;
+    Mux16 MUX_OUT(
+        f_out,
+        no_eq1,
+        no,
+        out
+    );
+
 
     assign zr = out == 16'b0 ? 1 : 0;
-    assign ng = out[15] == 1 ? 1 : 0;
+
+
+    // assign ng = out[15] == 1 ? 1 : 0;
+
+    Mux MUX_NG(
+        1'b0,
+        1'b1,
+        out[15],
+        ng
+    );
+
 
 endmodule

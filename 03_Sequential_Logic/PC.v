@@ -15,14 +15,65 @@ module PC(
 	input reset,
 	output [15:0] out
 );	
-	reg [15:0] out_cnt;
-	always @(posedge clk) begin
-		if(reset) out_cnt<=16'b0;
-		else if(load) out_cnt<=in;
-		else if(inc) out_cnt<=out_cnt+1'b1;
-	end
-	
-	assign out = out_cnt;
+	// reg [15:0] out_cnt;
+	// always @(posedge clk) begin
+	// 	if(reset) out_cnt<=16'b0;
+	// 	else if(load) out_cnt<=in;
+	// 	else if(inc) out_cnt<=out_cnt+1'b1;
+	// end
+ //
+	// assign out = out_cnt;
+
+	wire [15:0] out_reg;
+	wire [15:0] out_reg2;
+	wire [15:0] inc_out;
+	wire [15:0] mux_inc_out;
+	wire [15:0] final_mux_out;
+
+
+
+
+	Register REG_16A(
+		clk,
+		in,
+		load,
+		out_reg
+	);
+
+	Inc16 INCREMENT(
+		out_reg,
+		inc_out
+	);
+
+	// Register REG_16B(
+	// 	clk,
+	// 	in,
+	// 	1'b1,
+	// 	out_reg2
+	// );
+
+	Mux16 NONE_INC(
+		out_reg,
+		inc_out,
+		inc,
+		mux_inc_out
+	);
+
+	Mux16 INC_LOAD(
+		mux_inc_out,
+		in,
+		load,
+		final_mux_out
+	);
+
+
+	Mux16 MUX_RESET(
+		final_mux_out,
+		16'b0,
+		reset,
+		out
+	);
+
 	// wire [15:0] dff_out;
 	// genvar i;
 	// generate

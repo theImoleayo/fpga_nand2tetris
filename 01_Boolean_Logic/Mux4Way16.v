@@ -7,10 +7,10 @@
 
 `default_nettype none
 module Mux4Way16(
-	input [15:0] a,
-	input [15:0] b,
-	input [15:0] c,
-	input [15:0] d,
+	input [15:0] a,//if sel==00
+	input [15:0] b, //if sel==01
+	input [15:0] c, //if sel==10
+	input [15:0] d, //if sel==11
    	input [1:0] sel,
 	output [15:0] out
 );

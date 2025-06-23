@@ -15,11 +15,24 @@ module Register(
 
 	// Put your code here:
 	reg [15:0] out_val;
-	always @(posedge clk) begin
-		if(load) out_val<=in;
-	end
+	// always @(posedge clk) begin
+	// 	if(load) out_val<=in;
+	// end
+ //
+	// assign out = out_val;
+ //
 
-	assign out = out_val;
+	// wire
+	genvar i;
+	generate
+		for(i=0; i<16; i=i+1) begin: gen_Reg
+			Bit BIT_REGISTER(
+				clk,
+				in[i],
+				load,
+				out[i]
+			);
+		end
 
-
+	endgenerate
 endmodule
