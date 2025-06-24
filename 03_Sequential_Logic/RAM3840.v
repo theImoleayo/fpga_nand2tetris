@@ -30,57 +30,19 @@ module RAM3840(
 	wire [15:0] slice_out_6;
 	wire [15:0] slice_out_7;
 	wire [15:0] slice_out_8;
-	wire class_A;
-	wire class_B;
-	wire class_C;
-	wire class_D;
-	wire class_E;
-	wire mid_class;
+
 
 	wire [15:0] mux_out;
 
-	wire [2:0] sel_ADDRESS = address[11:9];
+	wire [2:0] sel_ADDRESS;
 
-	And CLASS_A(
-		address[9],
-		address[10],
-		class_A
-	);
+	assign sel_ADDRESS = address[11:9];
 
-	And CLASS_B(
-		address[9],
-		address[11],
-		class_B
-	);
-
-	And CLASS_C(
-		address[10],
-		address[11],
-		class_C
-	);
-
-	And CLASS_D(
-		class_A,
-		class_B,
-		class_D
-	);
-
-	Or MID_CLASS(
-		address[10],
-		address[11],
-		mid_class
-	);
-
-	Or CLASS_E(
-		address[9],
-		mid_class,
-		class_E
-	);
 
 		assign slice_1 = (sel_ADDRESS===3'b000) ? address[8:0] : 9'b0;
 		assign slice_2 = (sel_ADDRESS===3'b001) ? address[8:0] : 9'b0;
 		assign slice_3 = (sel_ADDRESS===3'b010) ? address[8:0] : 9'b0;
-		assign slice_4 = (sel_ADDRESS===3'b010) ? address[8:0] : 9'b0;
+		assign slice_4 = (sel_ADDRESS===3'b011) ? address[8:0] : 9'b0;
 		assign slice_5 = (sel_ADDRESS===3'b100) ? address[8:0] : 9'b0;
 		assign slice_6 = (sel_ADDRESS===3'b101) ? address[8:0] : 9'b0;
 		assign slice_7 = (sel_ADDRESS===3'b110) ? address[8:0] : 9'b0;
@@ -159,7 +121,7 @@ module RAM3840(
 		slice_out_6,
 		slice_out_7,
 		slice_out_8,
-		sel_ADDRESS,
+		address[11:9],
 		mux_out
 	);
 

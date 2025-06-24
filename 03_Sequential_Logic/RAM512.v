@@ -23,8 +23,8 @@ module RAM512(
 	// wire [7:0] addr_A = address[8:1];
 	// wire [7:0] addr_B = address[7:0];
 
-	assign addr_A = (address[8]==1'b0) ? address[7:0]: 7'b0;
-	assign addr_B = (address[8]==1'b1) ? address[7:0]: 7'b0;
+	assign addr_A = (address[8]===1'b0) ? address[7:0]: 7'b0;
+	assign addr_B = (address[8]===1'b1) ? address[7:0]: 7'b0;
 
 
 	RAM256 RAM_BUILT(
