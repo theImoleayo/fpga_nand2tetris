@@ -15,51 +15,6 @@ module RAM512(
 
 	wire [15:0] ram_output;
 	wire [15:0] ram_output2;
-	wire [15:0] final_output;
-
-	wire [7:0] addr_A;
-	wire [7:0] addr_B;
-
-	// wire [7:0] addr_A = address[8:1];
-	// wire [7:0] addr_B = address[7:0];
-
-	assign addr_A = (address[8]==1'b0) ? address[7:0]: 7'b0;
-	assign addr_B = (address[8]==1'b1) ? address[7:0]: 7'b0;
-
-
-	RAM256 RAM_BUILT(
-		clk,
-		addr_A,
-		in,
-		load,
-		ram_output
-	);
-	RAM256 RAM_BUILT2(
-		clk,
-		addr_B,
-		in,
-		load,
-		ram_output2
-	);
-
-	Mux16 RAM512(
-		ram_output,
-		ram_output2,
-		address[8],
-		final_output
-	);
-
-	assign out = final_output;
-
-
-
-
-	//SUPRISINGLY, THE CODE CAN ALSO BE LIKE THIS
-
-	/*
-
-	wire [15:0] ram_output;
-	wire [15:0] ram_output2;
 	wire [15:0] reg_out;
 	wire [15:0] final_output;
 	wire [15:0] mux_out;
@@ -97,10 +52,10 @@ module RAM512(
 		end
 	endgenerate
 
-
-	//assign slice = address[8] ? address[7:0] : addr_A;
-	//assign addr_A = address[8]==1'b0 ? address[7:0] : 8'b0;
-
+	/*
+	assign slice = address[8] ? address[7:0] : addr_A;
+	assign addr_A = address[8]==1'b0 ? address[7:0] : 8'b0;
+	*/
 
 	Mux16 RAM512(
 		ram_output,
@@ -110,7 +65,6 @@ module RAM512(
 	);
 
 	assign out = final_output;
-	*/
 
 
 endmodule
