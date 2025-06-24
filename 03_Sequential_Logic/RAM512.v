@@ -13,49 +13,58 @@ module RAM512(
 	output [15:0] out
 );
 
-	// wire [15:0] out_7bit;
-	// wire [15:0] out_1_bit;
+	wire [15:0] ram_output;
+	wire [15:0] ram_output2;
+	wire [15:0] reg_out;
+	wire [15:0] final_output;
+	wire [15:0] mux_out;
+	wire [7:0] slice;
+	wire [7:0] addr_A;
 
-	reg [15:0] regRAM [0:511];
-	always @(posedge clk)
-		if (load) regRAM[address[8:0]] <= in;
-
-	assign out = regRAM[address[8:0]];
-
-
-
-/*
-	RAM256 Bit_7_RAM(
+	RAM256 RAM_BUILT(
 		clk,
-		address[7:0],
-		in[15:0],
+		addr_A,
+		in,
 		load,
-		out_7bit[15:0]
+		ram_output
 	);
-	
-
-	Register Bit_1_RAM(
+	RAM256 RAM_BUILT2(
 		clk,
-		in[15:0],
+		slice,
+		in,
 		load,
-		out_1_bit[15:0]
+		ram_output2
 	);
+	wire [7:0] nought;
 
-	reg [15:0] out_val;
-	always @(posedge clk) begin
-		if(address[7:0]) begin
-			out_val<=out_7bit;
+	assign nought = 8'b0;
+
+		genvar i, j;
+	generate
+		for(i = 0; i<8; i = i+1) begin: gen_ADDR8
+			Mux Mux16_A( addr_A[i], address[i], address[8],  slice[i]);
 		end
-		else if(address[8]) out_val<=out_1_bit;
+	endgenerate
 
-	end
-	assign out = out_val;*/
-	// // Put your code here:
-	// reg [15:0] ram_val;
-	// always @(posedge clk) begin
-	// 	if(load) ram_val[address[8:0]]<=in;
-	// end
- //
-	// assign out = ram_val;
+	generate
+		for(j = 0; j<8; j = j+1) begin: gen_ADDR7
+			Mux Mux16_A( address[j], nought[j], address[8],  addr_A[j]);
+		end
+	endgenerate
+
+	/*
+	assign slice = address[8] ? address[7:0] : addr_A;
+	assign addr_A = address[8]==1'b0 ? address[7:0] : 8'b0;
+	*/
+
+	Mux16 RAM512(
+		ram_output,
+		ram_output2,
+		address[8],
+		final_output
+	);
+
+	assign out = final_output;
+
 
 endmodule
