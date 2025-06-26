@@ -36,7 +36,7 @@ module BitShift8L(
 
 	generate
 		for(i=0; i<8; i=i+1) begin: Mux_8BitA
-			Mux Mux_8Bit(
+			Mux Mux_8BitA(
 				mux_B_out[i],
 				in[i],
 				load,
@@ -47,7 +47,7 @@ module BitShift8L(
 
 	generate
 		for(j=0; j<8; j=j+1) begin: Mux_8BitB
-			Mux Mux_8Bit(
+			Mux Mux_8BitB(
 				out_prev[j],
 				new_in[j],
 				shift,
@@ -57,7 +57,7 @@ module BitShift8L(
 	endgenerate
 
 	generate
-		for(k=0; k<8; k=k+1) begin: Mux_8BitC
+		for(k=0; k<8; k=k+1) begin: Bit_8
 			Bit Bit_Register(
 				clk,
 				mux_A_out[k],
