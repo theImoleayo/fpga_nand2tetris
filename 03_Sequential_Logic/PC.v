@@ -17,7 +17,8 @@ module PC(
 );	
     wire [15:0] reg_out;
     wire [15:0] inc_out;
-    wire [15:0] mux_out;
+    wire [15:0]
+ mux_out;
     wire [15:0] inc_mux_out;
     wire [15:0] load_mux_out;
 
@@ -58,10 +59,6 @@ module PC(
         reset,
         mux_out
     );
-
     assign out = reg_out;
-
 	//--------------------
-
-
 endmodule
